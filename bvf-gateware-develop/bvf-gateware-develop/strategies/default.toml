@@ -1,0 +1,42 @@
+[build]
+[build.metadata]
+project_name = 'bvf-gateware-[GIT_HASH]'
+top_level_name = 'bvf_gw_[GIT_HASH]'
+
+design_version = 1
+
+[build.locations] # Python scripts will make these absolute paths
+bitstream_dir = './build/bitstreams/' # Prog Export Path
+project_dir = './build/space/libero_proj/' # Libero Project Path (where project is created)
+mss_output_dir = './build/space/mss/' # MSS Output Path
+dtbo_output_dir = './build/space/dtbo/' # DTBO Output Path
+package_output_dir = './build/package' # Package Output Path
+
+# Cape Module
+[[build.modules]] # Note: these are passed as environment variables rather than command line arguments
+name = 'cape'
+variant = 'default'
+version = 1.0
+[[build.modules.constraint]]
+file_name = 'cape.pdc'
+
+[[build.modules]]
+name = 'm2'
+variant = 'default'
+version = 1.0
+[[build.modules.constraint]]
+file_name = 'm2.pdc'
+
+[build.mss]
+mss_cfg_location = '/home/jon/development/workspace/bvf-gateware/source/fpga/core/mss/mss_config.cfg'
+
+[hss]
+should_clone = false # Currently only false is supported
+hss_location = '/home/jon/development/workspace/hart-software-services'
+hss_output_dir = './build/space/hss/' # HSS Build Path
+board='bvf'
+
+[packaging]
+package_name = 'bvf-gateware-[GIT_HASH]'
+include_dtbo = true
+include_bitstream = true
